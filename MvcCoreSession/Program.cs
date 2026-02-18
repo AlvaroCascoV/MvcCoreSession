@@ -3,6 +3,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+//MEMORIA DISTRIBUIDA PARA QUE SESSION FUNCIONE
+builder.Services.AddDistributedMemoryCache();
+//CREAMOS UN SERVICIO DE SESSION
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(10);
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -19,6 +27,11 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapStaticAssets();
+
+//entre auth y mvc va session
+//HABILITAMOS SESSION PARA EL SERVER
+app.UseSession();
+
 
 app.MapControllerRoute(
     name: "default",

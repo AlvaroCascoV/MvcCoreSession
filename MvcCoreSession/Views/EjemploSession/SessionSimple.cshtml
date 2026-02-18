@@ -1,0 +1,10 @@
+﻿<h1 style="color:blue">Session simple</h1>
+
+<p>
+    <a asp-controller="EjemploSession" asp-action="SessionSimple" asp-route-accion="almacenar" class="btn btn-primary">Almacenar</a>
+    <a asp-controller="EjemploSession" asp-action="SessionSimple" asp-route-accion="mostrar" class="btn btn-secondary">Mostrar</a>
+</p>
+
+<h2 style="color:red">@ViewData["MENSAJE"]</h2>
+<h2 style="color:fuchsia">@ViewData["NOMBRE"]</h2>
+<h2 style="color:green">@ViewData["HORA"]</h2>

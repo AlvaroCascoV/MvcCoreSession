@@ -1,4 +1,15 @@
-﻿<h1>Ejemplos Session</h1>
+﻿@using MvcCoreSession.Helpers
+@{
+    byte[] data = Context.Session.Get("MASCOTA");
+    Mascota mascota = null;
+
+    if (data != null)
+    {
+        mascota = HelperBinarySession.ByteToObject(data) as Mascota;
+    }
+}
+
+<h1>Ejemplos Session</h1>
 
 <h2 style="color:blue">
     @Context.Session.GetString("nombre")
@@ -6,6 +17,12 @@
 <h2 style="color:red">
     @Context.Session.GetString("hora")
 </h2>
+@if (mascota != null)
+{     
+    <p>
+        Nombre: @mascota.Nombre, Raza: @mascota.Raza, Edad: @mascota.Edad
+    </p>
+}
 
 <ul class="list-group">
     <li class="list-group-item">

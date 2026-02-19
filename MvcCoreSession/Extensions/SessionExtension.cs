@@ -1,5 +1,6 @@
 ﻿
 using MvcCoreSession.Helpers;
+using Newtonsoft.Json;
 
 namespace MvcCoreSession.Extensions
 {
@@ -20,13 +21,17 @@ namespace MvcCoreSession.Extensions
             else
             {
                 //RECUPERAMOS EL OBJETO Y LO CONVERTIMOS CON NUESTRO HELPER
-                T data = HelperJsonSession.DeserializeObject<T>(json);
+                //T data = HelperJsonSession.DeserializeObject<T>(json);
+                //no necesitamos el helper
+                T data = JsonConvert.DeserializeObject<T>(json);
                 return data;
             }
         }
         public static void SetObject(this ISession session, string key, object value)
         {
-            string data = HelperJsonSession.SerializeObject(value);
+            //string data = HelperJsonSession.SerializeObject(value);
+            //no necesitamos el helper
+            string data = JsonConvert.SerializeObject(value);
             session.SetString(key, data);
         }
     }

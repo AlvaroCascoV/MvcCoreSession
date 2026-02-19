@@ -22,5 +22,6 @@ namespace MvcCoreSession.Helpers
             T objeto = JsonConvert.DeserializeObject<T>(data);
             return objeto;
         }
+        //este codigo se queda sin usar porque era para explicacion
     }
 }

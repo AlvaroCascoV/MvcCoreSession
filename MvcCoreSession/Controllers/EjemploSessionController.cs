@@ -7,9 +7,20 @@ namespace MvcCoreSession.Controllers
 {
     public class EjemploSessionController : Controller
     {
+        //recuperamos el helper de contextAccessor
+        HelperSessionContextAccessor helper;
+
+        public EjemploSessionController(HelperSessionContextAccessor helper)
+        {
+            this.helper = helper;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            //usamos el helper de contextAccessor
+            List<Mascota> mascotas = this.helper.GetMascotasSession();
+
+            return View(mascotas);
         }
 
         public IActionResult SessionSimple(string accion)

@@ -1,4 +1,5 @@
-﻿@using MvcCoreSession.Helpers
+﻿@model List<Mascota>
+@using MvcCoreSession.Helpers
 @{
     //------Bytes-------
     // byte[] data = Context.Session.Get("MASCOTA");
@@ -61,3 +62,40 @@
         <a asp-controller="EjemploSession" asp-action="SessionMascotasCollectionGeneric">Session Mascotas Collection Generic</a>
     </li>
 </ul>
+
+
+@if (Model != null)
+{
+    <h1 style="color:blue">Mascotas ContextAccessor</h1>
+    <table class="table table-primary">
+        <thead>
+            <tr>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Raza
+                </th>
+                <th>
+                    Edad
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Raza)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Edad)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

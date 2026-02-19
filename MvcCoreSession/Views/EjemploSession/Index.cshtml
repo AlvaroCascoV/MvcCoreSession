@@ -1,12 +1,23 @@
 ﻿@using MvcCoreSession.Helpers
 @{
-    byte[] data = Context.Session.Get("MASCOTA");
+    //------Bytes-------
+    // byte[] data = Context.Session.Get("MASCOTA");
+    // Mascota mascota = null;
+
+    // if (data != null)
+    // {
+    //     mascota = HelperBinarySession.ByteToObject(data) as Mascota;
+    // }
+    //------JSON-------
+    string data = Context.Session.GetString("MASCOTAJSON");
     Mascota mascota = null;
 
     if (data != null)
     {
-        mascota = HelperBinarySession.ByteToObject(data) as Mascota;
+        mascota = HelperJsonSession.DeserializeObject<Mascota>(data);
     }
+    //-----Generico-----
+    Mascota tortu = Context.Session.GetObject<Mascota>("MASCOTAGENERIC");
 }
 
 <h1>Ejemplos Session</h1>
@@ -19,8 +30,14 @@
 </h2>
 @if (mascota != null)
 {     
-    <p>
+    <p style="color:fuchsia">
         Nombre: @mascota.Nombre, Raza: @mascota.Raza, Edad: @mascota.Edad
+    </p>
+}
+@if (tortu != null)
+{
+    <p style="color:green">
+        Nombre: @tortu.Nombre, Raza: @tortu.Raza, Edad: @tortu.Edad
     </p>
 }
 
@@ -33,5 +50,14 @@
     </li>
     <li class="list-group-item">
         <a asp-controller="EjemploSession" asp-action="SessionMascotaCollection">Session Mascotas Collection</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-controller="EjemploSession" asp-action="SessionMascotaJson">Session Mascotas JSON</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-controller="EjemploSession" asp-action="SessionMascotaGeneric">Session Mascotas Generic</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-controller="EjemploSession" asp-action="SessionMascotasCollectionGeneric">Session Mascotas Collection Generic</a>
     </li>
 </ul>
